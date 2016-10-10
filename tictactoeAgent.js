@@ -11,7 +11,7 @@ var Agent = function () { //creating an agent object
     }
 	//return a random feee spot
 	var returnNumber = freeCells[Math.floor(Math.random() * freeCells.length)];
-	
+
 	/*if (board.playerOne)
 		console.log("Player one played X at " + returnNumber);
 	else
@@ -25,14 +25,14 @@ Agent.prototype.selectMove = function(board) {
     for (var i = 1; i < 10; i++) {
         if (board.cellFree(i)) freeCells.push(i);
     }
-	
+
 	//call a defendMethod
 	var mode = block(board);
 	if (mode > 0) {
 		//console.log("Blocked play");
 		return mode;
 	} else {
-		
+
 		mode = attack(board);
 		if (mode > 0) {
 			return mode;
@@ -61,11 +61,11 @@ function attack(board){
 		array = board.X;
 	else
 		array = board.O;
-	
+
 	for (var i = 0; i < array.length; i++) {
 		for (var j = 1; j < array.length; j++) {
 			var spot = 15 - (array[i] + array[j]);
-			if (board.cellFree(spot)) {
+			if (spot>0 && spot <10 && board.cellFree(spot)) {
 				return spot;
 			}
 		}
@@ -75,21 +75,21 @@ function attack(board){
 
 function block(board){
 	var array = [];
-	
+
 	if (board.playerOne)
 		array = board.O;
-	else 
+	else
 		array = board.X;
-	
+
 	if (array.length > 0) {
 		var b = array.length-1;
 		var value = array[b];
 		console.log("value "+value);
 	}
-	
+
 	for(var i = 0; i < array.length;i++){
 		 var k = 15 - (value + array[i]);
-		if(k < 10 && board.cellFree(k)){
+		if(k>0 && k < 10 && board.cellFree(k)){
 			return k;
 		}
 	}
