@@ -139,8 +139,8 @@ window.onload = function () {
     games.push([]);
     games.push([5]);
     games.push([1]);
-    games.push([8]);
-    games.push([8, 5]);
+    games.push([8]);//failed
+    games.push([8, 5]);//failed
     games.push([5, 8]);
     games.push([5, 6]);
     games.push([5, 2]);
@@ -161,13 +161,12 @@ window.onload = function () {
     games.push([4, 5, 9]);
     games.push([8, 5, 3]);
     games.push([6, 5, 7]);
-
     // win
-    games.push([5, 8, 2, 1]);
+    games.push([5, 8, 2, 1]);//failed
     games.push([5, 9, 7, 2]);
-    games.push([5, 7, 1]);
+    games.push([5, 7, 1]);//failed
     games.push([5, 3, 8]);
-    games.push([5, 7, 6]);
+    games.push([5, 7, 6]);//failed
     games.push([8, 3, 1]);
     games.push([5, 3, 9]);
     games.push([5, 1]);
@@ -192,16 +191,23 @@ window.onload = function () {
 
     var indexer = 0;
     var score = 0;
-
+    var k =0;
     function testGame(gb, cond) {
         if (cond !== undefined) {
+
             if (cond === states[indexer++]) {
                 score++;
+                k++;
                 console.log(cond === states[indexer - 1]);
+            }else {
+              console.log("it failed"+score);
             }
         }
         if (indexer < games.length) {
             gb.reset();
+            if(score == 20){
+              console.log("you are here");
+            }
             var list = games[indexer];
             for (var i = 0; i < list.length; i++) {
                 gb.move(list[i]);
